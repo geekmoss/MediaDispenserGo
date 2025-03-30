@@ -3,6 +3,7 @@ package middlewares
 import (
 	"MediaDispenserGo/config"
 	"encoding/json"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -31,23 +32,20 @@ func Authenticate(next http.HandlerFunc, operation Operation) http.HandlerFunc {
 		// Zjištění odpovídajícího pravidla na základě prefixu
 		dispensingMode := config.AppConfig.Dispensing
 
-		// Pokud se jedná o rootu, tedy bez prefixu
-		if strings.Count(r.URL.Path, "/") == 2 {
-			for _, prefixRule := range config.AppConfig.DispensingPrefix {
-				if prefixRule.Prefix == "." {
-					dispensingMode = prefixRule.Mode
-				}
-			}
+		// Pokud se jedná o root, tedy bez prefixu
+		if strings.Count(r.URL.Path, "/") == 2 && config.AppConfig.DispensingRoot != "" {
+			dispensingMode = config.AppConfig.DispensingRoot
 		} else {
 			// Hledá se dle prefixu zda je třeba přepsat pravidlo
 			for _, prefixRule := range config.AppConfig.DispensingPrefix {
-				if strings.HasPrefix(r.URL.Path, "/"+prefixRule.Prefix) {
+				log.Println(r.URL.Path, "/"+prefixRule.Prefix)
+				if strings.HasPrefix(r.URL.Path, "/g/"+prefixRule.Prefix) {
 					dispensingMode = prefixRule.Mode
 					break
 				}
 			}
 		}
-
+		log.Println(r.URL.Path)
 		// Zohlednění typu výdeje (dispensing)
 		if strings.HasPrefix(r.URL.Path, "/g") {
 			switch dispensingMode {

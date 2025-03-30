@@ -31,6 +31,7 @@ type Config struct {
 		Secure    bool   `yaml:"secure"`
 	} `yaml:"s3"`
 	Dispensing       DispensingMode `yaml:"dispensing"`
+	DispensingRoot   DispensingMode `yaml:"dispensingRoot"`
 	DispensingPrefix []struct {
 		Prefix string         `yaml:"prefix"`
 		Mode   DispensingMode `yaml:"mode"`
