@@ -38,7 +38,6 @@ func Authenticate(next http.HandlerFunc, operation Operation) http.HandlerFunc {
 		} else {
 			// Hledá se dle prefixu zda je třeba přepsat pravidlo
 			for _, prefixRule := range config.AppConfig.DispensingPrefix {
-				log.Println(r.URL.Path, "/"+prefixRule.Prefix)
 				if strings.HasPrefix(r.URL.Path, "/g/"+prefixRule.Prefix) {
 					dispensingMode = prefixRule.Mode
 					break
