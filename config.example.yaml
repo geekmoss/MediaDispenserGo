@@ -1,0 +1,30 @@
+tokens:
+  - name: profile-pics
+    token: token-string
+    isolation: profiles
+  - name: pastes
+    token: pastes
+    isolation: pastes
+  - name: root
+    token: root
+    disallow:
+      - list
+      - get
+      - upload
+      - delete
+s3:
+  access_key: access
+  secret_key: secret
+  bucket: media-dispenser
+  host: host
+  secure: true
+dispensing: public  # Global rule
+dispensingPrefix:
+  - prefix: "."  # Root
+    mode: private
+  - prefix: profiles
+    mode: public
+  - prefix: pastes
+    mode: none
+plugins:
+  - WebPConverter

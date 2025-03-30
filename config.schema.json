@@ -1,0 +1,77 @@
+{
+  "type": "object",
+  "properties": {
+    "tokens": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          },
+          "isolation": {
+            "type": "string"
+          },
+          "disallow": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["name", "token"]
+      }
+    },
+    "s3": {
+      "type": "object",
+      "properties": {
+        "access_key": {
+          "type": "string"
+        },
+        "secret_key": {
+          "type": "string"
+        },
+        "bucket": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "secure": {
+          "type": "boolean"
+        }
+      },
+      "required": ["access_key", "secret_key", "bucket", "host", "secure"]
+    },
+    "dispensing": {
+      "type": "string",
+      "enum": ["public", "private", "none"]
+    },
+    "dispensingPrefix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "prefix": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": ["public", "private", "none"]
+          }
+        },
+        "required": ["prefix", "mode"]
+      }
+    },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["tokens", "s3", "dispensing"]
+}
