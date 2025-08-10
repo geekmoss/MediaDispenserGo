@@ -2,18 +2,11 @@
 
 ## What is it for?
 
-Primarily to meet my needs. I have various small applications built on top of S3. 
-However, I was frustrated handling uploads in them. At the same time, 
-direct upload to S3 isn't feasible in some cases. 
-I also wanted to try building a project in Go again after a long time (I'm a newbie, so the code might reflect that).
+A lightweight S3 gateway with a REST API for uploading, serving, and processing media files.
 
-Additionally, I wanted, optionally, to handle unique names, convert images to WebP, 
-and maybe other tasks in the future.
+It sits between your apps and S3, taking care of uploads, downloads, and optional processing like automatic file renaming or converting images to WebP. Access can be public or token-based, and extra logic can be added through plugins.
 
-That's why I created MediaDispenser, a small server as a single point for S3 with a REST interface. 
-The original idea was for a significantly larger and more universal project, but maybe one day...
-
-My main need was handling uploads, but issuing files through this server is also possible — whether public or via token.
+Designed as a single, easy-to-deploy service, it makes S3 integration simpler, more secure, and more flexible. Originally built to solve my own upload frustrations, it’s flexible enough to work as a drop-in media gateway for almost any project.
 
 ## Build
 
